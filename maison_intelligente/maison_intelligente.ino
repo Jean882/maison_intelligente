@@ -100,7 +100,7 @@ void displaySerial(double distance) {
   Serial.print(distance);
   //Serial.print(",deg:");
   //Serial.println(getCurrentAngle());
-  Serial.print(" ,alarme:");
+  Serial.print(",alarme:");
   Serial.println(alarmActive);
 }
 
