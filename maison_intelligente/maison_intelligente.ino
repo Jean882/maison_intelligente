@@ -47,13 +47,11 @@ const unsigned long measureInterval = 50;
 const unsigned long serialInterval = 100;
 const unsigned long minAngle = 10;
 const unsigned long maxAngle = 170;
-
 const unsigned long alarmTimeout = 3000; // 3 secondes
-
 const unsigned long colorInterval = 250; // changer de couleur toutes les 250 ms
 
 bool alarmActive = false;
-bool ledState = false;
+bool ledRGBState = false;
 
 #pragma region
 
@@ -73,27 +71,37 @@ void displayLCD(double distance) {
   lcd.print(" cm");
 
   lcd.setCursor(0, 1);
-  switch (state) {
-    case CLOSED:
-      lcd.print("Porte: Closed");
-      break;
-    case OPEN:
-      lcd.print("Porte: Open");
-      break;
-    default:
-      lcd.print("Porte: ");
-      lcd.print(getCurrentAngle());
-      lcd.print(" deg");
-      break;
+
+  lcd.print("Alarme: ");
+  if (alarmActive) {
+    lcd.print("on");
+  } else {
+    lcd.print("off");
   }
+
+  //switch (state) {
+    //case CLOSED:
+      //lcd.print("Porte: Closed");
+      //break;
+    //case OPEN:
+      //lcd.print("Porte: Open");
+      //break;
+    //default:
+      //lcd.print("Porte: ");
+      //lcd.print(getCurrentAngle());
+      //lcd.print(" deg");
+      //break;
+  //}
 }
 
 void displaySerial(double distance) {
   Serial.print("etd:2206160");
   Serial.print(",dist:");
   Serial.print(distance);
-  Serial.print(",deg:");
-  Serial.println(getCurrentAngle());
+  //Serial.print(",deg:");
+  //Serial.println(getCurrentAngle());
+  Serial.print(" ,alarme:");
+  Serial.println(alarmActive);
 }
 
 void redColor() {
@@ -128,8 +136,8 @@ void updateAlarm(double distance) {
   if (alarmActive) {
     if (currentTime - lastColorSwitch >= colorInterval) {
       lastColorSwitch = currentTime;
-      ledState = !ledState;
-      if (ledState) {
+      ledRGBState = !ledRGBState;
+      if (ledRGBState) {
         redColor();
       } else {
         blueColor();
