@@ -112,15 +112,6 @@ void noColors() {
   digitalWrite(PIN_BLUE, HIGH);
   digitalWrite(PIN_GREEN, HIGH);
   digitalWrite(PIN_RED, HIGH);
-} 
-
-void colors() {
-  int currentColor = 0;
-
-  switch (currentColor) {
-    case 0: redColor(); currentColor++; break;
-    case 1: blueColor(); currentColor = 0; break;
-  }
 }
 
 #pragma endregion
