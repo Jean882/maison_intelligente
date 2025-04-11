@@ -55,9 +55,9 @@ bool ledRGBState = false;
 
 #pragma region
 
-int getCurrentAngle() {  // return map angle
-  return map(myStepper.currentPosition(), closedPosition, openPosition, minAngle, maxAngle);
-}
+//int getCurrentAngle() {  // return map angle
+  //return map(myStepper.currentPosition(), closedPosition, openPosition, minAngle, maxAngle);
+//}
 
 double measureDistance() {  // return distance
   return distanceSensor.dist();
@@ -197,6 +197,7 @@ void setup() {
   Serial.begin(115200);
   lcd.begin();
   lcd.backlight();
+  
 
   pinMode(PIN_RED,   OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
